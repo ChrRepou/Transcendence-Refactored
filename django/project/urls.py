@@ -16,12 +16,13 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path, re_path
+from django.urls import path, re_path, include
 from .views import main
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+	path("accounts/", include("django.contrib.auth.urls")),
     path('', main, name='index'),
-	path('/login', main, name='login'),
+	path('login', main, name='login'),
     re_path(r'^.*$', main, name='404'),
 ]
