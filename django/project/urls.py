@@ -17,12 +17,12 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, re_path, include
+from django.views.generic.base import TemplateView
 from .views import main
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 	path("accounts/", include("django.contrib.auth.urls")),
-    path('', main, name='index'),
-	path('login', main, name='login'),
+	path("", TemplateView.as_view(template_name="home.html"), name="home"),
     re_path(r'^.*$', main, name='404'),
 ]
