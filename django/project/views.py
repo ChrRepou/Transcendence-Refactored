@@ -2,9 +2,11 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.contrib import messages
-from django.contrib.auth.forms import UserCreationForm
 from django.views.decorators.csrf import csrf_protect
 from .forms import PlayerRegistrationForm
+from django.contrib.auth.forms import UserCreationForm
+from django.urls import reverse_lazy
+from django.views.generic import CreateView
 
 @csrf_protect
 def register(request):
@@ -28,3 +30,7 @@ def register(request):
 def main(request):
     return render(request, 'index.html')
 
+class SignUpView(CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy("login")
+    template_name = "registration/signup.html"
